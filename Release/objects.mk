@@ -4,5 +4,5 @@
 
 USER_OBJS := ../libLCD_LIB.a
 
-LIBS :=
+LIBS := -lm
 

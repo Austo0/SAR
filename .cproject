@@ -41,7 +41,9 @@
 								<option id="de.innot.avreclipse.linker.option.otherobjs.217516397" name="Other Objects (*.o)" superClass="de.innot.avreclipse.linker.option.otherobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="../libLCD_LIB.a"/>
 								</option>
-								<option id="de.innot.avreclipse.linker.option.libs.350369582" name="Libraries (-l)" superClass="de.innot.avreclipse.linker.option.libs"/>
+								<option id="de.innot.avreclipse.linker.option.libs.350369582" name="Libraries (-l)" superClass="de.innot.avreclipse.linker.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="m"/>
+								</option>
 								<option id="de.innot.avreclipse.linker.option.libpath.1736722590" name="Libraries Path (-L)" superClass="de.innot.avreclipse.linker.option.libpath"/>
 								<inputType id="de.innot.avreclipse.tool.linker.input.486930315" name="OBJ Files" superClass="de.innot.avreclipse.tool.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
