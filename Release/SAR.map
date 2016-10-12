@@ -1,10 +1,10 @@
 Archive member included because of file (symbol)
 
-../libLCD_LIB.a(LCD_LIB.o)    ./buttonint.o (lcd_clear)
+../libLCD_LIB.a(LCD_LIB.o)    ./SAR.o (lcd_clear)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                              ./buttonint.o (__floatsisf)
+                              ./SAR.o (__floatsisf)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                              ./buttonint.o (__mulsf3)
+                              ./SAR.o (__mulsf3)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
                               c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(mulsf3.o) (__mulsf3x)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(fp_inf.o)
@@ -24,13 +24,13 @@ c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/li
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a(_exit.o)
                               c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5/crtm328p.o (exit)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a(_copy_data.o)
-                              ./buttonint.o (__do_copy_data)
+                              ./SAR.o (__do_copy_data)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a(_clear_bss.o)
                               ../libLCD_LIB.a(LCD_LIB.o) (__do_clear_bss)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libc.a(dtostrf.o)
-                              ./buttonint.o (dtostrf)
+                              ./SAR.o (dtostrf)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libc.a(snprintf.o)
-                              ./buttonint.o (snprintf)
+                              ./SAR.o (snprintf)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
                               c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libc.a(snprintf.o) (vfprintf)
 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libc.a(dtoa_prf.o)
@@ -65,7 +65,7 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5/crtm328p.o
-LOAD ./buttonint.o
+LOAD ./SAR.o
 LOAD ../libLCD_LIB.a
 LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a
 LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
@@ -245,7 +245,7 @@ LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
                 0x0000019c                __vector_16
                 0x0000019c                __vector_18
                 0x0000019c                __vector_20
- .text          0x000001a0        0x0 ./buttonint.o
+ .text          0x000001a0        0x0 ./SAR.o
  .text          0x000001a0        0x0 ../libLCD_LIB.a(LCD_LIB.o)
  .text          0x000001a0        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(floatsisf.o)
  .text          0x000001a0        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(mulsf3.o)
@@ -274,10 +274,10 @@ LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
                 0x000001a0                . = ALIGN (0x2)
  *(.text.*)
  .text.Initialise_Interrupts
-                0x000001a0       0x24 ./buttonint.o
+                0x000001a0       0x24 ./SAR.o
                 0x000001a0                Initialise_Interrupts
  .text.startup.main
-                0x000001c4       0xe2 ./buttonint.o
+                0x000001c4       0xe2 ./SAR.o
                 0x000001c4                main
  .text.ctrl_port_set_bits
                 0x000002a6       0x1e ../libLCD_LIB.a(LCD_LIB.o)
@@ -446,7 +446,7 @@ LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5/crtm328p.o
- .data          0x00800100        0x0 ./buttonint.o
+ .data          0x00800100        0x0 ./SAR.o
  .data          0x00800100        0x0 ../libLCD_LIB.a(LCD_LIB.o)
  .data          0x00800100        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(floatsisf.o)
  .data          0x00800100        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(mulsf3.o)
@@ -476,7 +476,7 @@ LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800100        0x7 ./buttonint.o
+                0x00800100        0x7 ./SAR.o
  *(.gnu.linkonce.d*)
                 0x00800108                . = ALIGN (0x2)
  *fill*         0x00800107        0x1 
@@ -487,7 +487,7 @@ LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
                 0x00800108                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800108        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5/crtm328p.o
- .bss           0x00800108        0x0 ./buttonint.o
+ .bss           0x00800108        0x0 ./SAR.o
  .bss           0x00800108        0x0 ../libLCD_LIB.a(LCD_LIB.o)
  .bss           0x00800108        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(floatsisf.o)
  .bss           0x00800108        0x0 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libm.a(mulsf3.o)
@@ -564,7 +564,7 @@ LOAD c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/avr5\libgcc.a
 
 .comment        0x00000000       0x11
  *(.comment)
- .comment       0x00000000       0x11 ./buttonint.o
+ .comment       0x00000000       0x11 ./SAR.o
                                  0x12 (size before relaxing)
  .comment       0x00000000       0x12 ../libLCD_LIB.a(LCD_LIB.o)
  .comment       0x00000000       0x12 c:/program files (x86)/mhv avr tools/bin/../lib/gcc/avr/4.7.1/../../../../avr/lib/avr5\libc.a(dtostrf.o)

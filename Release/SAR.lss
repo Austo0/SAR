@@ -297,9 +297,9 @@ Disassembly of section .text:
      25a:	80 e0       	ldi	r24, 0x00	; 0
      25c:	90 e0       	ldi	r25, 0x00	; 0
      25e:	0e 94 c3 02 	call	0x586	; 0x586 <__floatsisf>
-     262:	21 ea       	ldi	r18, 0xA1	; 161
-     264:	30 ea       	ldi	r19, 0xA0	; 160
-     266:	40 ea       	ldi	r20, 0xA0	; 160
+     262:	2a e0       	ldi	r18, 0x0A	; 10
+     264:	37 ed       	ldi	r19, 0xD7	; 215
+     266:	43 ea       	ldi	r20, 0xA3	; 163
      268:	5c e3       	ldi	r21, 0x3C	; 60
      26a:	0e 94 fe 02 	call	0x5fc	; 0x5fc <__mulsf3>
      26e:	86 01       	movw	r16, r12

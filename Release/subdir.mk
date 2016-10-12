@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../buttonint.c 
+../SAR.c 
 
 OBJS += \
-./buttonint.o 
+./SAR.o 
 
 C_DEPS += \
-./buttonint.d 
+./SAR.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

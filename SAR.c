@@ -1,11 +1,9 @@
 /*
- *  buttonint.c
- *
- *  By M. J. Cree
- * Edited by Austen Fogarty 1231547
- * Demonstrates the use of timers and interrupts
- * to make a stopwatch with stop and reset buttons
- *
+ *  SAR.c
+ * By Austen Fogarty 1231547
+ * Demonstrates the use of a successive approximation register
+ * using the pwm output to generate a constant reference voltage
+ * over a low pass filer
  */
 
 #include <avr/io.h>
@@ -49,26 +47,21 @@ int main(void)
 	{
 		OCR2A = (1 << 7);	// 50% duty cycle
 
-		 		for(int i = 7; i >= 0; i--)
+		 		for(int i = 7; i >= 0; i--)	// For 8 bits
 		 		{
 		 			OCR2A |= (1 << i);	// Set the bit to check
-		 			_delay_ms(50);
+		 			_delay_ms(50);		// Wait for reference voltage to settle
 
-
-		 			if(!(PINB & (1 << PB0)))
+		 			if(!(PINB & (1 << PB0)))	// If the reference voltage is higher than the ADC input
 		 			{
-		 				OCR2A &= ~(1 << i);
+		 				OCR2A &= ~(1 << i);		// Set the current bit to a zero
 		 			}
 		 		}
-		 		ADC1 = OCR2A;
-		 		dtostrf(((double)5/255)*ADC1,4,2,voltage);
-
-		 		snprintf(str,20,"V = %s",voltage);
-
-		 		lcd_clear();			//Clear the LCD
-		 		lcd_display(str,0);		// Display the time
-
-
+		 		ADC1 = OCR2A;	// Save the PWM duty cycle
+		 		dtostrf(((double)5.10/255)*ADC1,4,2,voltage);	// Calculate the corresponding voltage
+		 		snprintf(str,20,"V = %s",voltage);				// Convert to string
+		 		lcd_clear();									// Clear the LCD
+		 		lcd_display(str,0);								// Display the voltage on the LCD
 	}
 	return 0;
 }
