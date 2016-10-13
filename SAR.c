@@ -28,6 +28,82 @@
 	        sei();
  }
 
+// Slow SAR conversion
+double SAR_Conversion()
+ {
+		int delay = 50;
+
+		int ADC1;					// Measured ADC
+		OCR2A = (1 << 7);			// 50% duty cycle
+
+		 for(int i = 7; i >= 0; i--)	// For 8 bits
+		 {
+		 	OCR2A |= (1 << i);			// Set the bit to check
+		 	_delay_ms(delay);			// Wait for reference voltage to settle
+
+		 	if(!(PINB & (1 << PB0)))	// If the reference voltage is higher than the ADC input
+		 	{
+		 		OCR2A &= ~(1 << i);		// Set the current bit to a zero
+		 	}
+		 }
+		 ADC1 = OCR2A;					// Save the PWM duty cycle
+
+
+	 return ((double)5.04/255)*ADC1;
+ }
+
+// Fast SAR conversion
+double SAR_Conversion1()
+ {
+		int delay = 2;
+
+		int ADC1;						// Measured ADC
+		OCR2A = (1 << 7);				// 50% duty cycle
+
+		 for(int i = 7; i >= 0; i--)	// For 8 bits
+		 {
+		 	OCR2A |= (1 << i);			// Set the bit to check
+		 	_delay_ms(delay);			// Wait for reference voltage to settle
+
+		 	if(!(PINB & (1 << PB0)))	// If the reference voltage is higher than the ADC input
+		 	{
+		 		OCR2A &= ~(1 << i);		// Set the current bit to a zero
+		 	}
+		 }
+		 ADC1 = OCR2A;					// Save the PWM duty cycle
+
+
+	 return ((double)5.04/255)*ADC1;
+ }
+
+/* Calculate the mean of N ADC samples */
+float Mean(int const *nsamples,int N)
+{
+	float u = 0;
+	// N = Number of samples
+	for (int n = 0; n < N; n++)
+	{
+		u +=nsamples[n];
+	}
+
+	return ((float)u)/N;		//Calculate Mean;
+}
+
+
+/* Calculate the standard deviation of N samples */
+float Standard_Deviation(int const *nsamples,int N)
+{
+	float M = Mean(nsamples,N);
+	float U2 = 0;
+	for (int n = 0; n < N; n++)
+	{
+		U2 += pow((float)(nsamples[n]-M),2);
+	}
+	U2 = ((float)U2/N);
+	return sqrt(U2);
+}
+
+
 int main(void)
 {
 	Initialise_Interrupts();	//Initialise interrupts
@@ -39,29 +115,35 @@ int main(void)
 	PORTB = 0x00;
 
 	lcd_init('c');		// Initialise the LCD
-	char str[20];		// Display
-	char voltage[20];	// Voltage
-	int ADC1;			// Measured ADC
+	char str[34];		// Display
+	char Svoltage[20];	// standard deviation voltage
+	char Mvoltage[20];	// mean voltage
+	char S[20];			// standard deviation ADC
+	char M[20];			// mean ADC
 
+	int N = 500;
+	int nsamples[N];	// voltage
 	while (1)
 	{
-		OCR2A = (1 << 7);	// 50% duty cycle
+		// For the specified number of samples
+		for(int n = 0; n < N; n++)
+		{
+		SAR_Conversion1();		// Run the SAR conversion
 
-		 		for(int i = 7; i >= 0; i--)	// For 8 bits
-		 		{
-		 			OCR2A |= (1 << i);	// Set the bit to check
-		 			_delay_ms(50);		// Wait for reference voltage to settle
+		nsamples[n] = OCR2A;
+		_delay_ms(2);
+		}
+		dtostrf(((double)5.04/255)*Standard_Deviation(nsamples,N),5,4,Svoltage); // Standard Deviation voltage value
+		dtostrf(Mean(nsamples,N),5,3,M);							// Mean ADC value
+		dtostrf(((double)5.04/255)*Mean(nsamples,N),5,4,Mvoltage);	// Mean voltage
+		dtostrf(Standard_Deviation(nsamples,N),5,4,S);				// Standard Deviation ADC value
 
-		 			if(!(PINB & (1 << PB0)))	// If the reference voltage is higher than the ADC input
-		 			{
-		 				OCR2A &= ~(1 << i);		// Set the current bit to a zero
-		 			}
-		 		}
-		 		ADC1 = OCR2A;	// Save the PWM duty cycle
-		 		dtostrf(((double)5.10/255)*ADC1,4,2,voltage);	// Calculate the corresponding voltage
-		 		snprintf(str,20,"V = %s",voltage);				// Convert to string
-		 		lcd_clear();									// Clear the LCD
-		 		lcd_display(str,0);								// Display the voltage on the LCD
+
+		 snprintf(str,34,"M: %sV\nS:%sV %s",Mvoltage,Svoltage,S);	// Convert to string
+		 _delay_ms(200);
+		 lcd_clear();												// Clear the LCD
+		 lcd_display(str,0);										// Display the voltage on the LCD
+
 	}
 	return 0;
 }
